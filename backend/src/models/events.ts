@@ -8,7 +8,7 @@ interface IEvent {
 
 const EventSchema = new Schema<IEvent>(
   {
-    title: { type: Schema.Types.String, required: true },
+    title: { type: Schema.Types.String, required: true, unique: true },
     article: { type: Schema.Types.String, required: true },
     image: { type: Schema.Types.String },
   },

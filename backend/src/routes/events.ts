@@ -10,8 +10,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const events = await EventModel.findById(id);
-  res.status(200).json(events);
+  try {
+    const events = await EventModel.findById(id);
+    res.status(200).json(events);
+  } catch (e) {
+    console.error("error: ", e);
+    res.status(400).json({ message: "id not found" });
+  }
 });
 
 export default router;

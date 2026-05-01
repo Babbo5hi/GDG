@@ -20,12 +20,20 @@ const FaqSchema = new Schema<IFaq>(
   { _id: false },
 );
 
-const CourseSchema = new Schema<ICourse>({
-  title: { type: Schema.Types.String, required: true },
-  desc: { type: Schema.Types.String },
-  url: { type: Schema.Types.String, reuired: true },
-  image: { type: Schema.Types.String },
-  faq: [FaqSchema],
-});
+const CourseSchema = new Schema<ICourse>(
+  {
+    title: {
+      type: Schema.Types.String,
+      required: true,
+      trim: true,
+      unique: true,
+    },
+    desc: { type: Schema.Types.String },
+    url: { type: Schema.Types.String, reuired: true },
+    image: { type: Schema.Types.String },
+    faq: { type: [FaqSchema], required: false, default: [] },
+  },
+  { timestamps: true },
+);
 
 export const CourseModel = model("course", CourseSchema);
